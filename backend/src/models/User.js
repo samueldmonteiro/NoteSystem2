@@ -41,8 +41,6 @@ const UserSchema = new mongoose.Schema({
 },
 {timestamps: true});
 
-UserSchema.index({ email: 1 }, { unique: true });
-UserSchema.index({ username: 1 }, { unique: true });
 
 UserSchema.virtual('permissions', {
   ref: 'Permission',
@@ -50,4 +48,4 @@ UserSchema.virtual('permissions', {
   foreignField: 'user'
 });
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

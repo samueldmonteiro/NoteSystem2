@@ -48,4 +48,4 @@ NoteSchema.virtual('versionHistory', {
 });
 
 
-module.exports = mongoose.model('Note', NoteSchema);
+export default mongoose.model('Note', NoteSchema);
