@@ -7,7 +7,7 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 - backend/
   - src/config/ – Configurações do banco de dados.
   - src/controllers/ – Lógica de controle das rotas.
-  - src/middleware/ – Middlewares para autenticação e validação (futuramente).
+  - src/middleware/ – Middlewares para autenticação e validação 
   - src/models/ – Modelos Mongoose: usuários, notas, permissões, versões e sessões.
   - src/routes/ – Rotas da API.
   - src/utils/ – Código de inicialização do servidor.
@@ -21,13 +21,28 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 
 ### 🔧 Back-end
 
-- [ ] Criar endpoints REST para autenticação (login, registro, verificação)
-- [ ] Criar CRUD para notas (create, read, update, delete)
+#### 🔐 Autenticação
+
+- [x] Criar endpoints REST para login e registro
+- [x] Proteger rotas com autenticação via JWT
+- [x] Verificação de sessões com tokens de acesso e refresh
+
+#### 📝 Notas
+
+- [x] Criar notas (Create)
+- [x] Buscar notas do usuário (Read)
+- [x] Atualizar notas com validação (Update)
+- [x] Deletar notas (Delete)
 - [ ] Implementar filtragem e busca por título, conteúdo ou tags
-- [ ] Gerenciar permissões por nota
 - [ ] Implementar sistema de histórico de versões
+
+#### 👥 Permissões & Colaboração
+
+- [ ] Gerenciar permissões por nota (leitura, escrita, etc.)
 - [ ] Criar endpoints para sessões colaborativas
-- [ ] Proteger rotas com autenticação e autorização
+
+#### 🧪 Testes
+
 - [ ] Implementar testes unitários (Jest ou outro)
 
 ### 💾 Banco de Dados
@@ -37,8 +52,6 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 - [x] Modelar esquema de permissões (`Permission`)
 - [x] Modelar versão de notas (`NoteVersion`)
 - [x] Modelar sessões de colaboração (`CollaborationSession`)
-- [ ] Criar índices no MongoDB para otimizar busca
-- [ ] Criar seeds (dados iniciais de exemplo)
 
 ### 🌐 Front-end (futuro)
 
@@ -51,14 +64,32 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 - [ ] Indicação de presença em sessões colaborativas
 
 ---
+### 🔧 Endpoints Principais
 
+#### 🔐 Autenticação
+
+- POST /api/users/register – Registro de novo usuário
+- POST /api/users/login – Login
+- POST /api/users/logout – Logout
+- POST /api/users/refresh – Renova token
+
+#### 📝 Notas
+
+- POST /api/notes/createnote – Criar nota
+- PUT /api/notes/updatenote/:id – Editar nota
+- DELETE /api/notes/deletenote/:id – Deletar nota
+- GET /api/notes/getnote/:id – Ver nota individual
+- GET /api/notes/getallnotes – Ver todas as notas do usuário
+
+---
 ## 🧠 Tecnologias Utilizadas
 
-- Node.js + Express
-- MongoDB + Mongoose
-- JWT para autenticação
-- TailwindCSS (front-end futuro)
-- React.js (front-end futuro)
+- **Node.js** + **Express**
+- **MongoDB** + **Mongoose**
+- **JWT** para autenticação
+- **Passport.js** com estratégias Local e JWT
+- **bcryptjs** para hash de senhas
+- **React.js** + **TailwindCSS** (em desenvolvimento)
 
 ---
 
