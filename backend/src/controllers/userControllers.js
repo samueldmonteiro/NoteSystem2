@@ -1,48 +1,16 @@
 import passport from 'passport';
 import { generateAccessToken, generateRefreshToken, verifyRefreshToken } from '../utils/jwt.js';
 import jwt from 'jsonwebtoken'
+import { findUserById, registerService } from '../services/userServices.js';
 
-import bcrypt from 'bcryptjs';
-import User from '../models/User.js';
-
-// Register Users
 export const Register = async (req, res) => {
   const {username, email, password, confirmpassword} = req.body;
-
-  // validations
-  if (!username || !email || !password) {
-    return res.status(400).json( {msg: "Preencha todos os daos"} )
-  }
-
-  if (password !== confirmpassword) {
-    return res.status(400).json( {msg: "As senhas não se conferem"} )
-  }
-
-  try {
-    const existerUser = await User.findOne({ email });
-    const existerUsername = await User.findOne({ username });
-
-    if (existerUser) return res.status(409).json({msg: "Email já existe"});
-    if (existerUsername) return res.status(409).json({msg: "Username já existe"})
-
-    const passwordHash = await bcrypt.hash(password, 12);
-
-    const user = new User({
-      username,
-      email,
-      password: passwordHash
-    })
-
-   await user.save();
-
-    
+  try { 
+    const user = await registerService(username, email, password)
     res.status(201).json({msg: "Usuario criado com sucesso!"})
-
   } catch (error) {
-    console.log(`Ocorreu um erro: ${error}`)
-    res.status(500).json({msg: "Erro ao se registrar"})
+    res.status(500).json({msg:`${error}`})
   }
-
 }
 
 export const Login = async (req, res) => {
@@ -116,7 +84,8 @@ export const refreshAcessToken = async (req, res) => {
 
   try {
     const payload = verifyRefreshToken(token);
-    const user = await User.findById(payload.id);
+    const user = await findUserById(payload.id)
+
     if (!user) return res.status(401).json({ error: 'Usuário não encontrado' });
 
     const newAccessToken = generateAccessToken(user);

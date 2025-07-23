@@ -12,3 +12,4 @@ export const authenticateJWT = (req, res, next) => {
     next();
   })(req, res, next);
 };
+
