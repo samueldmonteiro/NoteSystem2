@@ -5,12 +5,15 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 ## 📦 Estrutura do Projeto
 
 - backend/
-  - src/config/ – Configurações do banco de dados.
+  - src/config/ – Configurações do banco de dados e Passport.
   - src/controllers/ – Lógica de controle das rotas.
   - src/middleware/ – Middlewares para autenticação e validação 
   - src/models/ – Modelos Mongoose: usuários, notas, permissões, versões e sessões.
   - src/routes/ – Rotas da API.
   - src/utils/ – Código de inicialização do servidor.
+  - src/services/ – Lógica de negócios.
+  - src/validators/ – Validação de dados de entrada.
+  - server.js – Configuração principal do servidor.
   - .env, package.json – Configuração do ambiente e dependências.
 
 - frontend/ – Interface do usuário (a ser implementada).
@@ -23,9 +26,11 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 
 #### 🔐 Autenticação
 
-- [x] Criar endpoints REST para login e registro
-- [x] Proteger rotas com autenticação via JWT
-- [x] Verificação de sessões com tokens de acesso e refresh
+- [x] Sistema de registro e login com validação
+- [x] Autenticação JWT com tokens de acesso e refresh
+- [x] Middleware de autenticação para rotas protegidas
+- [x] Logout com invalidação de tokens
+- [x] Renovação automática de tokens de acesso
 
 #### 📝 Notas
 
@@ -83,13 +88,17 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 
 ---
 ## 🧠 Tecnologias Utilizadas
+- **Backend**:
+  - **Node.js** + **Express**
+  - **MongoDB** + **Mongoose**
+  - **JWT** para autenticação
+  - **Passport.js** com estratégias Local e JWT
+  - **bcryptjs** para hash de senhas
+  - **express-validator** para validação
 
-- **Node.js** + **Express**
-- **MongoDB** + **Mongoose**
-- **JWT** para autenticação
-- **Passport.js** com estratégias Local e JWT
-- **bcryptjs** para hash de senhas
-- **React.js** + **TailwindCSS** (em desenvolvimento)
+- **Frontend** (futuro):
+  - React.js
+  - TailwindCSS
 
 ---
 
@@ -97,8 +106,8 @@ Este é um projeto de um sistema de notas com funcionalidades de colaboração e
 
 ```bash
 # Clone o repositório
-git clone https://github.com/seu-usuario/sistema-notas.git
-cd sistema-notas
+git clone https://github.com/KauaLima157/NoteSystem2.git
+cd NoteSystem2/backend
 
 # Instale as dependências
 npm install
