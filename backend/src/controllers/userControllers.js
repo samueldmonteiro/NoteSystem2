@@ -7,7 +7,14 @@ export const Register = async (req, res) => {
   const {username, email, password, confirmpassword} = req.body;
   try { 
     const user = await registerService(username, email, password)
-    res.status(201).json({msg: "Usuario criado com sucesso!"})
+     res.status(201).json({
+      msg: "Usuário criado com sucesso!",
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    });
   } catch (error) {
     res.status(500).json({msg:`${error}`})
   }

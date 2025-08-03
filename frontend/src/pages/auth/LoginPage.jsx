@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../hooks/auth/useAuth.jsx';
+import { useAuthLogin } from '../../hooks/auth/useAuthLogin.jsx';
 import LoginForm from '../../components/auth/LoginForm.jsx';
 
 const LoginPage = () => {
-  const { user, loading } = useAuth();
+  const { user, loading } = useAuthLogin();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,4 +20,5 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPage; 
+
